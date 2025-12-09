@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador HortSoy - V4 (Site na Esquerda)</title>
+    <style>
+        :root { --primary: #0d8c00; --dark: #075000; --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); padding: 40px; display: flex; justify-content: center; }
+        .main-container { display: grid; grid-template-columns: 350px 1fr; gap: 40px; max-width: 1200px; width: 100%; }
+        
+        /* Controles */
+        .controls { background: var(--card); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid #333; }
+        h2 { color: var(--primary); margin-top: 0; font-size: 20px; text-transform: uppercase; }
+        label { display: block; margin-top: 15px; font-size: 12px; color: #888; text-transform: uppercase; font-weight: bold; }
+        input { width: 100%; padding: 12px; margin-top: 5px; background: #2c2c2c; border: 1px solid #444; border-radius: 6px; color: white; font-size: 14px; box-sizing: border-box; transition: 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; background: #333; }
+        
+        /* Botões */
+        button { padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 14px; color: white; background: var(--primary); width: 100%; margin-top: 20px;}
+        button:hover { background: var(--dark); transform: translateY(-2px); }
+
+        /* Preview Area */
+        .previews { display: flex; flex-direction: column; gap: 30px; }
+        .preview-card { background: white; padding: 40px; border-radius: 16px; position: relative; min-height: 150px; display: flex; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .card-label { position: absolute; top: 10px; right: 15px; background: #eee; color: #555; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="controls">
+        <h2>Setup Final</h2>
+        
+        <label>Nome Completo</label>
+        <input type="text" id="nome" value="Christyan Araújo Silva" oninput="updateAll()">
+
+        <label>Cargo / Função</label>
+        <input type="text" id="cargo" value="Auxiliar de Suporte TI" oninput="updateAll()">
+
+        <label>WhatsApp / Celular</label>
+        <input type="text" id="celular" value="+55 (34) 9 9818-6917" oninput="updateAll()">
+
+        <button onclick="copyToClip('render-1')">📋 Copiar Assinatura</button>
+        <p id="toast" style="text-align: center; font-size: 12px; color: var(--primary); opacity: 0; transition: 0.5s;">Copiado!</p>
+    </div>
+
+    <div class="previews">
+        
+        <div class="preview-card">
+            <div class="card-label">Estilo Oficial HortSoy</div>
+            <div id="render-1">
+                <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.2;">
+                    <tr>
+                        <td valign="middle" style="padding-right: 20px; border-right: 1px solid #e0e0e0; text-align: center;">
+                             <img src="Logo Original.png" width="120" style="display: block; width: 120px; margin: 0 auto;">
+                             
+                             <div style="margin-top: 8px;">
+                                 <a href="http://www.hortsoy.com.br" style="color: #0d8c00; text-decoration: none; font-size: 12px; font-weight: bold;">www.hortsoy.com.br</a>
+                             </div>
+                        </td>
+                        
+                        <td valign="middle" style="padding-left: 20px;">
+                            <div id="nome-1" style="font-size: 20px; font-weight: 800; color: #075000; letter-spacing: -0.5px;">Christyan Araújo Silva</div>
+                            
+                            <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 6px; margin-bottom: 10px;">
+                                <tr>
+                                    <td style="background-color: #0d8c00; color: #ffffff; padding: 3px 8px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 2px;">
+                                        <span id="cargo-1">AUXILIAR DE SUPORTE TI</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="font-size: 13px; color: #555;">
+                                <span style="font-weight: 600; color: #0d8c00;">📱</span> <span id="celular-1">+55 (34) 9 9818-6917</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function updateAll() {
+        // Pega valores
+        const nome = document.getElementById('nome').value;
+        const cargo = document.getElementById('cargo').value;
+        const celular = document.getElementById('celular').value;
+
+        // Atualiza Render
+        document.getElementById('nome-1').innerText = nome;
+        document.getElementById('cargo-1').innerText = cargo.toUpperCase();
+        document.getElementById('celular-1').innerText = celular;
+    }
+
+    function copyToClip(elementId) {
+        const range = document.createRange();
+        range.selectNode(document.getElementById(elementId));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+
+        // Feedback visual
+        const toast = document.getElementById('toast');
+        toast.style.opacity = '1';
+        setTimeout(() => toast.style.opacity = '0', 2000);
+    }
+</script>
+
+</body>
+</html>
