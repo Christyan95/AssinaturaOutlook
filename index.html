@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerador HortSoy - V4 (Site na Esquerda)</title>
+    <title>Gerador HortSoy - V6 (Unidade Opcional)</title>
     <style>
         :root { --primary: #0d8c00; --dark: #075000; --bg: #121212; --card: #1e1e1e; --text: #e0e0e0; }
         body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); padding: 40px; display: flex; justify-content: center; }
@@ -12,10 +12,10 @@
         .controls { background: var(--card); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid #333; }
         h2 { color: var(--primary); margin-top: 0; font-size: 20px; text-transform: uppercase; }
         label { display: block; margin-top: 15px; font-size: 12px; color: #888; text-transform: uppercase; font-weight: bold; }
-        input { width: 100%; padding: 12px; margin-top: 5px; background: #2c2c2c; border: 1px solid #444; border-radius: 6px; color: white; font-size: 14px; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: var(--primary); outline: none; background: #333; }
         
-        /* Botões */
+        input, select { width: 100%; padding: 12px; margin-top: 5px; background: #2c2c2c; border: 1px solid #444; border-radius: 6px; color: white; font-size: 14px; box-sizing: border-box; transition: 0.3s; }
+        input:focus, select:focus { border-color: var(--primary); outline: none; background: #333; }
+        
         button { padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 14px; color: white; background: var(--primary); width: 100%; margin-top: 20px;}
         button:hover { background: var(--dark); transform: translateY(-2px); }
 
@@ -32,13 +32,34 @@
         <h2>Setup Final</h2>
         
         <label>Nome Completo</label>
-        <input type="text" id="nome" value="Christyan Araújo Silva" oninput="updateAll()">
+        <input type="text" id="nome" placeholder="Digite seu nome completo" oninput="updateAll()">
 
         <label>Cargo / Função</label>
-        <input type="text" id="cargo" value="Auxiliar de Suporte TI" oninput="updateAll()">
+        <input type="text" id="cargo" placeholder="Digite seu cargo" oninput="updateAll()">
+
+        <label>Unidade</label>
+        <select id="unidade" onchange="updateAll()">
+            <option value="">-- Selecione a Unidade --</option>
+            <option value="SANTA JULIANA">SANTA JULIANA</option>
+            <option value="PATROCÍNIO">PATROCÍNIO</option>
+            <option value="IBIÁ">IBIÁ</option>
+            <option value="ARAXÁ">ARAXÁ</option>
+            <option value="SÃO GOTARDO">SÃO GOTARDO</option>
+            <option value="IRAÍ DE MINAS">IRAÍ DE MINAS</option>
+            <option value="PATOS DE MINAS">PATOS DE MINAS</option>
+            <option value="COROMANDEL">COROMANDEL</option>
+            <option value="UBERABA">UBERABA</option>
+            <option value="PASSOS">PASSOS</option>
+            <option value="CARMO RIO CLARO">CARMO RIO CLARO</option>
+            <option value="PIUMHI">PIUMHI</option>
+            <option value="BAMBUI">BAMBUI</option>
+            <option value="CONCEIÇÃO DAS ALAGOAS">CONCEIÇÃO DAS ALAGOAS</option>
+            <option value="SACRAMENTO">SACRAMENTO</option>
+            <option value="CENTRO DE SOLUÇÕES CORPORATIVAS">CENTRO DE SOLUÇÕES CORPORATIVAS</option>
+        </select>
 
         <label>WhatsApp / Celular</label>
-        <input type="text" id="celular" value="+55 (34) 9 9818-6917" oninput="updateAll()">
+        <input type="text" id="celular" placeholder="+55 (XX) X XXXX-XXXX" oninput="updateAll()">
 
         <button onclick="copyToClip('render-1')">📋 Copiar Assinatura</button>
         <p id="toast" style="text-align: center; font-size: 12px; color: var(--primary); opacity: 0; transition: 0.5s;">Copiado!</p>
@@ -60,23 +81,27 @@
                         </td>
                         
                         <td valign="middle" style="padding-left: 20px;">
-                            <div id="nome-1" style="font-size: 20px; font-weight: 800; color: #075000; letter-spacing: -0.5px;">Christyan Araújo Silva</div>
+                            <div id="nome-1" style="font-size: 20px; font-weight: 800; color: #075000; letter-spacing: -0.5px;"></div>
                             
-                            <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 6px; margin-bottom: 10px;">
+                            <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 6px; margin-bottom: 6px;">
                                 <tr>
                                     <td style="background-color: #0d8c00; color: #ffffff; padding: 3px 8px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 2px;">
-                                        <span id="cargo-1">AUXILIAR DE SUPORTE TI</span>
+                                        <span id="cargo-1"></span>
                                     </td>
                                 </tr>
                             </table>
 
+                            <div id="box-unidade" style="display: none; margin-bottom: 8px; font-size: 11px; color: #555; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                📍 <span id="unidade-1" style="color: #333;"></span>
+                            </div>
+
                             <div style="font-size: 13px; color: #555;">
-                                <span style="font-weight: 600; color: #0d8c00;">📱</span> <span id="celular-1">+55 (34) 9 9818-6917</span>
+                                <span style="font-weight: 600; color: #0d8c00;">📱</span> <span id="celular-1"></span>
                             </div>
                         </td>
                     </tr>
                 </table>
-                </div>
+            </div>
         </div>
 
     </div>
@@ -87,12 +112,22 @@
         // Pega valores
         const nome = document.getElementById('nome').value;
         const cargo = document.getElementById('cargo').value;
+        const unidade = document.getElementById('unidade').value;
         const celular = document.getElementById('celular').value;
 
-        // Atualiza Render
+        // Atualiza Texto
         document.getElementById('nome-1').innerText = nome;
         document.getElementById('cargo-1').innerText = cargo.toUpperCase();
         document.getElementById('celular-1').innerText = celular;
+
+        // Lógica para esconder a linha da unidade se estiver vazia
+        const boxUnidade = document.getElementById('box-unidade');
+        if (unidade === "") {
+            boxUnidade.style.display = 'none';
+        } else {
+            boxUnidade.style.display = 'block';
+            document.getElementById('unidade-1').innerText = unidade;
+        }
     }
 
     function copyToClip(elementId) {
@@ -103,7 +138,6 @@
         document.execCommand("copy");
         window.getSelection().removeAllRanges();
 
-        // Feedback visual
         const toast = document.getElementById('toast');
         toast.style.opacity = '1';
         setTimeout(() => toast.style.opacity = '0', 2000);
