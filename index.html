@@ -1,352 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HortSoy | Gerador de Assinatura v7.1</title>
-    <link rel="icon" href="icone.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/icone.svg" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "v4jokpad9m");
     </script>
-    <style>
-        :root { 
-            --primary: #0d8c00; 
-            --primary-light: #15b300;
-            --dark: #075000; 
-            --bg: #f4f7f6; 
-            --card: #ffffff; 
-            --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
-            --border: #e1e8ed;
-        }
-
-        * { box-sizing: border-box; transition: all 0.2s ease; }
-
-        body { 
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; 
-            background: var(--bg); 
-            color: var(--text-main); 
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: var(--dark);
-            font-size: 24px;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .main-container { 
-            display: grid; 
-            grid-template-columns: 380px 1fr; 
-            gap: 30px; 
-            max-width: 1100px; 
-            width: 100%; 
-        }
-
-        .controls { 
-            background: var(--card); 
-            padding: 25px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-            height: fit-content; 
-            border: 1px solid var(--border); 
-        }
-
-        .input-group { margin-bottom: 18px; }
-
-        label { 
-            display: block; 
-            margin-bottom: 6px; 
-            font-size: 11px; 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            font-weight: 700; 
-            letter-spacing: 0.5px;
-        }
-        
-        input, select { 
-            width: 100%; 
-            padding: 12px 15px; 
-            background: #fff; 
-            border: 2px solid var(--border); 
-            border-radius: 10px; 
-            color: var(--text-main); 
-            font-size: 14px; 
-            outline: none;
-        }
-
-        input:focus, select:focus { 
-            border-color: var(--primary); 
-            box-shadow: 0 0 0 4px rgba(13, 140, 0, 0.1);
-        }
-
-        .btn-copy { 
-            padding: 16px; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 15px; 
-            color: white; 
-            background: var(--primary); 
-            width: 100%; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(13, 140, 0, 0.2);
-        }
-
-        .btn-copy:hover { 
-            background: var(--dark); 
-            transform: translateY(-2px);
-        }
-
-        .preview-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .preview-header {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .preview-window { 
-            background: white; 
-            padding: 40px; 
-            border-radius: 20px; 
-            position: relative; 
-            min-height: 250px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
-            border: 1px solid var(--border);
-            background-image: radial-gradient(#f0f0f0 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #333;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            opacity: 0;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        @media (max-width: 850px) {
-            .main-container { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
+
 <body>
 
-<header>
-    <h1>🌿 Criação Assinatura HortSoy</h1>
-</header>
+    <div class="main-container">
+        <div class="controls glass-card">
+            <div class="app-header">
+                <h1>🌿 Gerador de Assinatura</h1>
+                <p>HortSoy • Portal Corporativo</p>
+            </div>
 
-<div class="main-container">
-    <div class="controls">
-        <div class="input-group">
-            <label>Saudação Inicial</label>
-            <select id="saudacao" onchange="updateAll()">
-                <option value="Atenciosamente,">Atenciosamente,</option>
-                <option value="Cordialmente,">Cordialmente,</option>
-                <option value="Um abraço,">Um abraço,</option>
-                <option value="">Nenhuma</option>
-            </select>
+            <div class="input-group">
+                <label>Saudação Inicial</label>
+                <select id="saudacao" onchange="updateAll()">
+                    <option value="Atenciosamente,">Atenciosamente,</option>
+                    <option value="Cordialmente,">Cordialmente,</option>
+                    <option value="Um abraço,">Um abraço,</option>
+                    <option value="">Nenhuma</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Nome Completo</label>
+                <input type="text" id="nome" placeholder="Ex: João Silva" oninput="updateAll()">
+            </div>
+
+            <div class="input-group">
+                <label>Cargo / Função</label>
+                <input type="text" id="cargo" placeholder="Ex: Engenheiro Agrônomo" oninput="updateAll()">
+            </div>
+
+            <div class="input-group">
+                <label>Unidade Operacional</label>
+                <select id="unidade" onchange="updateAll()">
+                    <option value="">-- Opcional --</option>
+                    <option value="SANTA JULIANA">SANTA JULIANA</option>
+                    <option value="PATROCÍNIO">PATROCÍNIO</option>
+                    <option value="IBIÁ">IBIÁ</option>
+                    <option value="ARAXÁ">ARAXÁ</option>
+                    <option value="SÃO GOTARDO">SÃO GOTARDO</option>
+                    <option value="IRAÍ DE MINAS">IRAÍ DE MINAS</option>
+                    <option value="PATOS DE MINAS">PATOS DE MINAS</option>
+                    <option value="COROMANDEL">COROMANDEL</option>
+                    <option value="UBERABA">UBERABA</option>
+                    <option value="PASSOS">PASSOS</option>
+                    <option value="CARMO RIO CLARO">CARMO RIO CLARO</option>
+                    <option value="PIUMHI">PIUMHI</option>
+                    <option value="BAMBUI">BAMBUI</option>
+                    <option value="CONCEIÇÃO DAS ALAGOAS">CONCEIÇÃO DAS ALAGOAS</option>
+                    <option value="SACRAMENTO">SACRAMENTO</option>
+                    <option value="CSC - CENTRO DE SOLUÇÕES">CENTRO DE SOLUÇÕES CORPORATIVAS</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>WhatsApp / Celular</label>
+                <input type="text" id="celular" placeholder="(00) 0 0000-0000" oninput="maskPhone(this); updateAll()">
+            </div>
+
+            <button class="btn-copy" onclick="copyToClip('render-1')">
+                <span>📋</span> Copiar Assinatura
+            </button>
+
+            <a href="https://outlook.office.com/mail/options/accounts-category/signatures-subcategory" target="_blank"
+                class="btn-secondary">
+                <span>⚙️</span> Configurar Assinatura
+            </a>
         </div>
 
-        <div class="input-group">
-            <label>Nome Completo</label>
-            <input type="text" id="nome" placeholder="Ex: João Silva" oninput="updateAll()">
-        </div>
+        <div class="preview-section">
+            <div class="glass-card"
+                style="height: fit-content; display: flex; flex-direction: column; padding: 0; background: none; border: none; box-shadow: none; backdrop-filter: none;">
+                <div class="preview-window">
+                    <div id="render-1">
+                        <!-- Assinatura Estruturada para Outlook -->
+                        <div id="saudacao-txt"
+                            style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #333; margin-bottom: 16px;">
+                            Atenciosamente,</div>
+                        <table cellpadding="0" cellspacing="0" border="0"
+                            style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.2;">
+                            <tr>
+                                <td valign="middle"
+                                    style="padding-right: 25px; border-right: 2px solid #e0e0e0; text-align: center;">
+                                    <img src="https://hortsoy.com.br/wp-content/uploads/2025/02/HORTSOY-Logo-PNG-e1738797105809.png"
+                                        width="130" style="display: block; width: 130px; margin: 0 auto;"
+                                        alt="HortSoy Logo">
 
-        <div class="input-group">
-            <label>Cargo / Função</label>
-            <input type="text" id="cargo" placeholder="Ex: Engenheiro Agrônomo" oninput="updateAll()">
-        </div>
+                                    <div style="margin-top: 10px;">
+                                        <a href="http://www.hortsoy.com.br"
+                                            style="color: #0d8c00; text-decoration: none; font-size: 12px; font-weight: bold;">www.hortsoy.com.br</a>
+                                    </div>
+                                </td>
 
-        <div class="input-group">
-            <label>Unidade Operacional</label>
-            <select id="unidade" onchange="updateAll()">
-                <option value="">-- Opcional --</option>
-                <option value="SANTA JULIANA">SANTA JULIANA</option>
-                <option value="PATROCÍNIO">PATROCÍNIO</option>
-                <option value="IBIÁ">IBIÁ</option>
-                <option value="ARAXÁ">ARAXÁ</option>
-                <option value="SÃO GOTARDO">SÃO GOTARDO</option>
-                <option value="IRAÍ DE MINAS">IRAÍ DE MINAS</option>
-                <option value="PATOS DE MINAS">PATOS DE MINAS</option>
-                <option value="COROMANDEL">COROMANDEL</option>
-                <option value="UBERABA">UBERABA</option>
-                <option value="PASSOS">PASSOS</option>
-                <option value="CARMO RIO CLARO">CARMO RIO CLARO</option>
-                <option value="PIUMHI">PIUMHI</option>
-                <option value="BAMBUI">BAMBUI</option>
-                <option value="CONCEIÇÃO DAS ALAGOAS">CONCEIÇÃO DAS ALAGOAS</option>
-                <option value="SACRAMENTO">SACRAMENTO</option>
-                <option value="CSC - CENTRO DE SOLUÇÕES">CENTRO DE SOLUÇÕES CORPORATIVAS</option>
-            </select>
-        </div>
+                                <td valign="middle" style="padding-left: 25px;">
+                                    <div id="nome-1"
+                                        style="font-size: 22px; font-weight: 800; color: #075000; letter-spacing: -0.5px;">
+                                        Seu Nome Aqui</div>
 
-        <div class="input-group">
-            <label>WhatsApp / Celular</label>
-            <input type="text" id="celular" placeholder="(00) 0 0000-0000" oninput="maskPhone(this); updateAll()">
-        </div>
+                                    <table cellpadding="0" cellspacing="0" border="0"
+                                        style="margin-top: 6px; margin-bottom: 10px;">
+                                        <tr>
+                                            <td
+                                                style="background-color: #0d8c00; color: #ffffff; padding: 4px 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">
+                                                <span id="cargo-1">CARGO</span>
+                                            </td>
+                                        </tr>
+                                    </table>
 
-        <button class="btn-copy" onclick="copyToClip('render-1')">
-            <span>📋</span> Copiar para o Outlook
-        </button>
-    </div>
+                                    <div id="box-unidade"
+                                        style="display: none; margin-bottom: 8px; font-size: 11px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                                        <span style="color: #0d8c00;">📍</span> <span id="unidade-1"
+                                            style="color: #333;">UNIDADE</span>
+                                    </div>
 
-    <div class="preview-section">
-        <div class="preview-header">
-            <span>👁️ Visualização em tempo real</span>
-        </div>
-        <div class="preview-window">
-            <div id="render-1">
-                <!-- Assinatura Estruturada para Outlook -->
-                <div id="saudacao-txt" style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; color: #333; margin-bottom: 16px;">Atenciosamente,</div>
-                <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.2;">
-                    <tr>
-                        <td valign="middle" style="padding-right: 25px; border-right: 2px solid #e0e0e0; text-align: center;">
-                             <img src="https://hortsoy.com.br/wp-content/uploads/2025/02/HORTSOY-Logo-PNG-e1738797105809.png" width="130" style="display: block; width: 130px; margin: 0 auto;" alt="HortSoy Logo">
-                             
-                             <div style="margin-top: 10px;">
-                                 <a href="http://www.hortsoy.com.br" style="color: #0d8c00; text-decoration: none; font-size: 12px; font-weight: bold;">www.hortsoy.com.br</a>
-                             </div>
-                        </td>
-                        
-                        <td valign="middle" style="padding-left: 25px;">
-                            <div id="nome-1" style="font-size: 22px; font-weight: 800; color: #075000; letter-spacing: -0.5px;">Seu Nome Aqui</div>
-                            
-                            <table cellpadding="0" cellspacing="0" border="0" style="margin-top: 6px; margin-bottom: 10px;">
-                                <tr>
-                                    <td style="background-color: #0d8c00; color: #ffffff; padding: 4px 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">
-                                        <span id="cargo-1">CARGO</span>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <div id="box-unidade" style="display: none; margin-bottom: 8px; font-size: 11px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                                <span style="color: #0d8c00;">📍</span> <span id="unidade-1" style="color: #333;">UNIDADE</span>
-                            </div>
-
-                            <div style="font-size: 14px; color: #444;">
-                                <span style="font-weight: 600; color: #0d8c00;">📱</span> <span id="celular-1" style="font-weight: 600;">(00) 0 0000-0000</span>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                                    <div style="font-size: 14px; color: #444;">
+                                        <span style="font-weight: 600; color: #0d8c00;">📱</span> <span id="celular-1"
+                                            style="font-weight: 600;">(00) 0 0000-0000</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="toast" class="toast">✅ Assinatura copiada com sucesso!</div>
+    <div id="toast" class="toast">✅ Assinatura copiada com sucesso!</div>
 
-<script>
-    function maskPhone(i) {
-        let v = i.value.replace(/\D/g, "");
-        v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
-        v = v.replace(/(\d)(\d{4})$/, "$1-$2");
-        i.value = v;
-    }
-
-    function updateAll() {
-        const saudacao = document.getElementById('saudacao').value;
-        const nome = document.getElementById('nome').value || "Seu Nome Aqui";
-        const cargo = document.getElementById('cargo').value || "CARGO";
-        const unidade = document.getElementById('unidade').value;
-        const celular = document.getElementById('celular').value || "(00) 0 0000-0000";
-
-        // Atualiza Saudação
-        const saudacaoEl = document.getElementById('saudacao-txt');
-        if (saudacao === "") {
-            saudacaoEl.style.display = 'none';
-        } else {
-            saudacaoEl.style.display = 'block';
-            saudacaoEl.innerText = saudacao;
-        }
-
-        document.getElementById('nome-1').innerText = nome;
-        document.getElementById('cargo-1').innerText = cargo.toUpperCase();
-        document.getElementById('celular-1').innerText = celular;
-
-        const boxUnidade = document.getElementById('box-unidade');
-        if (unidade === "") {
-            boxUnidade.style.display = 'none';
-        } else {
-            boxUnidade.style.display = 'block';
-            document.getElementById('unidade-1').innerText = unidade;
-        }
-    }
-
-    function copyToClip(elementId) {
-        const range = document.createRange();
-        const element = document.getElementById(elementId);
-        range.selectNode(element);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-        
-        try {
-            document.execCommand("copy");
-            showToast();
-        } catch (err) {
-            console.error("Erro ao copiar", err);
-        }
-        
-        window.getSelection().removeAllRanges();
-    }
-
-    function showToast() {
-        const toast = document.getElementById('toast');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // Inicializa
-    window.onload = updateAll;
-</script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
