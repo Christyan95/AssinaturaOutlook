@@ -19,7 +19,14 @@ export default function HortSoySignature() {
     const [unidade, setUnidade] = useState("");
     const [celular, setCelular] = useState("");
     const [copied, setCopied] = useState(false);
+    const [baseUrl, setBaseUrl] = useState("");
     const signatureRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setBaseUrl(window.location.origin);
+        }
+    }, []);
 
     // Initial default values for preview ONLY (not inputs)
     const defaultNome = "Seu Nome";
@@ -189,10 +196,7 @@ export default function HortSoySignature() {
                                         <td valign="middle" style={{ paddingRight: "25px", borderRight: "2px solid #bbf7d0", textAlign: "center" }}>
                                             {/* LOGO HORTSOY */}
                                             <img
-                                                // Update this URL to the deployed public URL if possible, or use base64 if local only (but Outlook blocks base64 often). 
-                                                // For now, assuming localhost or user will host image. 
-                                                // Ideally replaced with a CDN link in production.
-                                                src="http://localhost:3000/assets/hortsoy-logo.png"
+                                                src={`${baseUrl}/assets/hortsoy-logo.png`}
                                                 width="120"
                                                 style={{ display: "block", width: "120px", margin: "0 auto" }}
                                                 alt="HortSoy Logo"

@@ -19,7 +19,14 @@ export default function TivorSignature() {
     const [unidade, setUnidade] = useState("");
     const [celular, setCelular] = useState("");
     const [copied, setCopied] = useState(false);
+    const [baseUrl, setBaseUrl] = useState("");
     const signatureRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setBaseUrl(window.location.origin);
+        }
+    }, []);
 
     // Initial default values for preview ONLY (not inputs)
     const defaultNome = "Seu Nome";
@@ -120,11 +127,7 @@ export default function TivorSignature() {
                             className="w-full p-2.5 bg-black/30 border border-[#065ECD]/40 rounded-lg text-sm outline-none focus:border-[#065ECD] focus:bg-black/50 focus:ring-1 focus:ring-[#065ECD]/50 transition-all font-sans text-white"
                         >
                             <option value="">-- Opcional --</option>
-                            <option value="TIVOR HEADQUARTERS">HEADQUARTERS</option>
-                            <option value="INOVAÇÃO">INOVAÇÃO</option>
-                            <option value="COMERCIAL">COMERCIAL</option>
-                            <option value="MARKETING">MARKETING</option>
-                            <option value="DESENVOLVIMENTO">DESENVOLVIMENTO</option>
+                            <option value="CONTABILIDADE">CONTABILIDADE</option>
                         </select>
                     </div>
 
@@ -178,10 +181,7 @@ export default function TivorSignature() {
                                         <td valign="middle" style={{ paddingRight: "25px", borderRight: "2px solid #bfdbfe", textAlign: "center" }}>
                                             {/* LOGO TIVOR */}
                                             <img
-                                                // Update this URL to the deployed public URL if possible, or use base64 if local only (but Outlook blocks base64 often). 
-                                                // For now, assuming localhost or user will host image. 
-                                                // Ideally replaced with a CDN link in production.
-                                                src="http://localhost:3000/assets/tivor-logo.png"
+                                                src={`${baseUrl}/assets/tivor-logo.png`}
                                                 width="120"
                                                 style={{ display: "block", width: "120px", margin: "0 auto" }}
                                                 alt="Tivor Logo"
