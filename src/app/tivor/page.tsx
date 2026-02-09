@@ -187,8 +187,8 @@ export default function TivorSignature() {
                                                 alt="Tivor Logo"
                                             />
                                             <div style={{ marginTop: "12px" }}>
-                                                <a href="http://www.tivor.com.br" style={{ color: "#065ECD", textDecoration: "none", fontSize: "12px", fontWeight: "bold", letterSpacing: "0.5px" }}>
-                                                    www.tivor.com.br
+                                                <a href="http://www.tivor.agr.br" style={{ color: "#065ECD", textDecoration: "none", fontSize: "12px", fontWeight: "bold", letterSpacing: "0.5px" }}>
+                                                    www.tivor.agr.br
                                                 </a>
                                             </div>
                                         </td>
