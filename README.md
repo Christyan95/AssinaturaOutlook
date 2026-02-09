@@ -1,84 +1,129 @@
-# 🌿 HortSoy | Gerador de Assinatura Corporativa (v7.1)
+# 📧 Gerador de Assinaturas Corporativo (Outlook Signature Hub)
 
-![License](https://img.shields.io/badge/license-Proprietary-red)
-![Version](https://img.shields.io/badge/version-7.1-green)
-![Status](https://img.shields.io/badge/status-Stable-blue)
+> **Versão 1.0.0** | Desenvolvido por **Christyan Silva**
 
-Este projeto é uma ferramenta web moderna e intuitiva desenvolvida para padronizar as assinaturas de e-mail dos colaboradores da **HortSoy**. Utilizando um design visual atraente com efeito **Glassmorphism**, a aplicação permite que os usuários gerem e copiem suas assinaturas formatadas especificamente para compatibilidade com o Microsoft Outlook.
+Bem-vindo ao **Outlook Signature Hub**, uma plataforma multi-tenant moderna e sofisticada desenvolvida para padronizar e gerar assinaturas de e-mail compatíveis com o Microsoft Outlook para múltiplas empresas.
 
-## 📋 Funcionalidades
-
--   **Visualização em Tempo Real**: A assinatura é montada instantaneamente enquanto o usuário digita seus dados.
--   **Compatibilidade com Outlook**: A saída HTML da assinatura é rigorosamente otimizada (Table-Based Layout) para garantir que a formatação (cores, logos e alinhamentos) seja preservada ao ser colada no Outlook.
--   **Design Premium (Glassmorphism)**: Interface moderna com fundos translúcidos, desfoque (blur) e sombras suaves.
--   **Cópia Inteligente**: Botão "Copiar Assinatura" que seleciona e copia apenas o conteúdo renderizado necessário, evitando estilos residuais.
--   **Acesso Rápido às Configurações**: Link direto para a página de configuração de assinaturas do Outlook Web.
--   **Mascaramento Automático**: Formatação automática para campos de telefone/celular.
--   **Feedback Visual**: Notificações (Toast) para confirmar ações como a cópia bem-sucedida.
-
-## 🛠️ Tecnologias Utilizadas
-
-O projeto foi construído seguindo princípios de **Clean Code** e separação de responsabilidades:
-
--   **HTML5**: Estrutura semântica para a interface e estrutura de tabelas legadas para compatibilidade de e-mail.
--   **CSS3**:
-    -   Variáveis CSS (`:root`) para fácil manutenção de temas.
-    -   efeitos de `backdrop-filter` para o vidro fosco.
-    -   Layout responsivo com `CSS Grid` e `Flexbox`.
--   **JavaScript (Vanilla)**:
-    -   Manipulação do DOM para atualizações em tempo real.
-    -   Lógica de cópia para a área de transferência (`Clipboard API` / `execCommand`).
-    -   Máscaras de input com Regex.
-
-## 📂 Estrutura do Projeto
-
-```text
-AssinaturaOutlook/
-│
-├── assets/             # Recursos estáticos
-│   ├── icone.svg       # Favicon
-│   └── Soja.png        # Imagem de fundo de alta resolução
-│
-├── css/                # Folhas de estilo
-│   └── style.css       # Estilos globais e tema Glassmorphism
-│
-├── js/                 # Lógica da aplicação
-│   └── script.js       # Scripts de atualização e cópia
-│
-└── index.html          # Ponto de entrada da aplicação
-```
-
-## 🚀 Como Usar
-
-1.  **Acesse a Ferramenta**: Abra o arquivo `index.html` em seu navegador.
-2.  **Preencha seus Dados**:
-    -   Escolha a **Saudação Inicial** (ex: Atenciosamente).
-    -   Insira seu **Nome Completo**.
-    -   Digite seu **Cargo / Função**.
-    -   Selecione sua **Unidade Operacional**.
-    -   Informe seu **Celular/WhatsApp** (a formatação é automática).
-3.  **Verifique a Assinatura**: Confira o resultado na janela de visualização à direita (ou abaixo, em mobile).
-4.  **Copie**: Clique no botão verde **"📋 COPIAR ASSINATURA"**.
-5.  **Configure no Outlook**:
-    -   Clique no botão **"⚙️ CONFIGURAR ASSINATURA"** para abrir o Outlook Web.
-    -   Ou vá manualmente nas configurações do seu Outlook Desktop.
-    -   Cole (Ctrl+V) a assinatura na caixa de edição.
-
-## 🎨 Detalhes de Design
-
-O projeto adota uma estética natural ligada ao agronegócio:
--   **Paleta de Cores**: Tons de Verde (#2ecc71, #0d8c00) e Branco.
--   **Tipografia**: Fonte *Inter* para a interface e *Arial/Segoe UI* para a assinatura (segurança de fonte de e-mail).
--   **Background**: Imagem temática de plantação de soja.
-
-## 🔧 Instalação e Desenvolvimento
-
-Para rodar o projeto localmente para desenvolvimento:
-
-1.  Clone o repositório ou baixe a pasta.
-2.  Certifique-se de que a estrutura de pastas (`assets`, `css`, `js`) esteja correta.
-3.  Abra o `index.html` diretamente no navegador ou use uma extensão como *Live Server* no VS Code.
+O projeto foi construído com foco em **design premium**, **experiência do usuário (UX)** fluida e **compatibilidade técnica** rigorosa com clientes de e-mail.
 
 ---
 
-**Desenvolvido por Christyan Silva** - *2026*
+## 🚀 Sobre o Projeto
+
+Este aplicativo web substitui geradores de assinatura antigos e manuais por uma interface centralizada e elegante. Ele atua como um "Hub" onde o colaborador seleciona sua empresa e é direcionado para um formulário específico da marca.
+
+### Principais Funcionalidades:
+
+*   **🏢 Arquitetura Multi-Tenant:** Suporte nativo para múltiplas empresas (atualmente **HortSoy** e **Tivor**) com identidades visuais completamente distintas.
+*   **🎨 Design Premium & Responsivo:** Interface construída com **Tailwind CSS v4** e animações suaves via **Framer Motion**.
+*   **⚡ Preview em Tempo Real:** Visualize sua assinatura enquanto digita.
+*   **📋 Cópia Compatível com Outlook:** O botão "Copiar Assinatura" gera um HTML rico específico (tabelas, styles inline) que garante que a assinatura não quebre ao ser colada no Outlook.
+*   **🎭 Temas Dinâmicos:**
+    *   **HortSoy:** Tema Agronegócio (Verde `#075000` + Folha).
+    *   **Tivor:** Tema Contabilidade/Tech (Azul `#065ECD` + Calculadora).
+*   **📱 Mascaramento de Dados:** Formatação automática para campos como telefone/celular.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+O projeto utiliza a stack mais moderna do ecossistema React:
+
+*   **[Next.js 16](https://nextjs.org/)** (App Router) - Framework React de alta performance.
+*   **[React 19](https://react.dev/)** - Biblioteca para construção de interfaces.
+*   **[Tailwind CSS v4](https://tailwindcss.com/)** - Estilização utilitária e moderna.
+*   **[Framer Motion](https://www.framer.com/motion/)** - Biblioteca de animações complexas e gestos.
+*   **[Lucide React](https://lucide.dev/)** - Ícones vetoriais leves e consistentes.
+*   **[Clsx & Tailwind-Merge](https://github.com/dcastil/tailwind-merge)** - Utiliários para classes condicionais.
+*   **TypeScript** - Tipagem estática para maior robustez do código.
+
+---
+
+## 📦 Instalação e Execução
+
+### Pré-requisitos
+*   **Node.js** (versão 18 ou superior recomendada)
+*   **npm** ou **yarn**
+
+### Passo a Passo
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/seu-usuario/assinatura-outlook.git
+    cd assinatura-outlook
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
+
+3.  **Execute o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    # ou
+    yarn dev
+    ```
+
+4.  **Acesse no navegador:**
+    Abra [http://localhost:3000](http://localhost:3000) para ver o Hub de Seleção.
+
+---
+
+## 📂 Estrutura do Projeto
+
+A estrutura de pastas segue o padrão do **Next.js App Router**:
+
+```
+.
+├── public/                 # Arquivos estáticos (imagens, logos, fundos)
+│   └── assets/             # Assets organizados por empresa
+├── src/
+│   ├── app/                # Rotas da aplicação
+│   │   ├── layout.tsx      # Layout global (fontes, metadados)
+│   │   ├── page.tsx        # Página Inicial (Hub de Seleção)
+│   │   ├── globals.css     # Estilos globais e diretivas do Tailwind
+│   │   ├── hortsoy/        # Rota da empresa HortSoy
+│   │   │   └── page.tsx    # Gerador específico HortSoy
+│   │   └── tivor/          # Rota da empresa Tivor
+│   │       └── page.tsx    # Gerador específico Tivor
+│   └── components/         # Componentes Reutilizáveis
+│       └── CompanyCard.tsx # Card animado da página inicial
+├── message.txt             # Histórico ou anotações (se houver)
+├── next.config.ts          # Configurações do Next.js
+├── package.json            # Dependências e scripts
+└── README.md               # Documentação do projeto
+```
+
+---
+
+## 🎨 Como Adicionar Nova Empresa
+
+Para adicionar uma nova empresa ao Hub, siga estes passos:
+
+1.  **Adicione os Assets:** Coloque o logo e o fundo da nova empresa na pasta `public/assets`.
+2.  **Crie a Rota:** Crie uma nova pasta em `src/app/nova-empresa` e adicione um arquivo `page.tsx`.
+    *   Dica: Copie o conteúdo de `src/app/tivor/page.tsx` e ajuste as cores, textos e logos.
+3.  **Atualize o Hub:** No arquivo `src/app/page.tsx`, adicione a nova empresa ao array `companies`:
+    ```typescript
+    {
+      name: "Nova Empresa",
+      slug: "nova-empresa",
+      description: "Descrição impactante da empresa.",
+      themeColor: "#COR_HEX",
+      logo: ( ...código do logo... ),
+    }
+    ```
+
+---
+
+## 📝 Licença e Direitos
+
+Este projeto é de uso privado e corporativo.
+Copyright © 2026 **Christyan Silva**. Todos os direitos reservados.
+
+---
+
+Developed with ❤️ by Christyan Silva
